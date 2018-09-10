@@ -1,0 +1,10 @@
+cscope.out
+tags
+*.o
+*.orig
+*~
+eCos.hhc
+eCos.hhp
+ecosap/ecosap
+ecosap/ecosap.bin
+ecos/ecosap/_ecos_build_/

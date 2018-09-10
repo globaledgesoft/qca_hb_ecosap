@@ -1,0 +1,96 @@
+# ====================================================================
+#
+#      dbg_print.cdl
+#
+#      dbg_print package configuration data
+#
+# ====================================================================
+
+cdl_package CYGPKG_DBG_PRINT {
+    display       "Common debug message support"
+    compile       dbg_print.c
+    include_dir   cyg/dbg_print
+    description   " "
+
+# ====================================================================
+# BUILD OPTIONS
+    cdl_component CYGPKG_DBG_PRINT_OPTIONS {
+        display "debug package build options"
+        flavor  none
+        no_define
+        description   " "
+
+        cdl_option CYGPKG_DBG_PRINT_CFLAGS_ADD {
+            display "Additional compiler flags"
+            flavor  data
+            no_define
+            default_value { "-DENABLE_DPRINT_MSGS" }
+            description   "
+                This option modifies the set of compiler flags for
+                building the error package. These flags are used in addition
+                to the set of global flags."
+        }
+
+        cdl_option CYGPKG_DBG_PRINT_CFLAGS_REMOVE {
+            display "Suppressed compiler flags"
+            flavor  data
+            no_define
+            default_value { "" }
+            description   "
+                This option modifies the set of compiler flags for
+                building the error package. These flags are removed from
+                the set of global flags if present."
+        }
+    }
+
+    cdl_component CYGPKG_DPRINTS {
+        display          "Print message flags"
+        flavor           bool
+        default_value    1
+        define -file system.h ENABLE_DPRINT_MSGS
+        description      "Options for choosing which prints should be present"
+                      
+        cdl_option CYGPKG_PRINT_CRITICAL {
+            display "Critical messages"
+            flavor  bool
+            define -file system.h CYGPKG_DBGLVL_CRITICAL
+            default_value 1
+            description "enabling the critical messages"
+        }
+
+        cdl_option CYGPKG_PRINT_ERROR {
+            display "error messages"
+            flavor  bool
+            define -file system.h CYGPKG_DBGLVL_ERROR
+            default_value 1
+            description "enabling the error messages"
+        }
+
+        cdl_option CYGPKG_PRINT_WARNING {
+            display "warning messages"
+            flavor  bool
+            define -file system.h CYGPKG_DBGLVL_WARNING
+            default_value 1
+            description "enabling the warnings"
+        }
+
+        cdl_option CYGPKG_PRINT_INFO {
+            display "info messages"
+            flavor  bool
+            define -file system.h CYGPKG_DBGLVL_INFO
+            default_value 1
+            description "enabling the info messages"
+        }
+
+        cdl_option CYGPKG_PRINT_DEBUG {
+            display "debug messages"
+            flavor  bool
+            define -file system.h CYGPKG_DBGLVL_DEBUG
+            default_value 0
+            description "enabling the debug messages"
+        }
+    }
+}
+
+# ====================================================================
+# EOF dbg_print.cdl

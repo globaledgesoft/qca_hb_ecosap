@@ -1,0 +1,110 @@
+menuconfig  BSP_PACKAGE
+	bool "BSP COMMANDS"
+	default y
+	help
+           Select the command you wish to use..
+
+if BSP_PACKAGE	
+	config  BSP_FLASH_API
+	default y
+	depends on  BSP_PACKAGE
+	bool "Flash config"
+
+	config  BSP_UPTIME
+	depends on  BSP_PACKAGE
+	default y
+	bool "UPTIME"
+	
+	config  BSP_DATE
+	depends on  BSP_PACKAGE
+	default y
+	bool "DATE"
+
+	config  BSP_UPGRADE
+	depends on  BSP_PACKAGE
+	default y
+	bool "upgrade"
+
+	config  BSP_WD
+	depends on  BSP_PACKAGE
+	default y
+	bool "WATCHDOG"
+
+	config  BSP_SORT
+	depends on  BSP_PACKAGE
+	default y
+	bool "SORT"
+
+	config  BSP_GPIO
+	depends on  BSP_PACKAGE
+	default y
+	bool "GPIO_TEST"
+
+	config  BSP_EXCEPTION
+	depends on  BSP_PACKAGE
+	default y
+	bool "EXCEPTION_TEST"
+
+endif
+
+menuconfig  WLAN_PACKAGE
+	bool "WLAN COMMANDS"
+	default y
+	help
+	  Select the command you wish to use.
+
+if WLAN_PACKAGE	
+	config  WLAN_HOSTAPD
+		depends on  WLAN_PACKAGE
+		default y
+		bool "hostapd"
+
+	config  WLAN_WPASUPPLICANT
+		depends on  WLAN_PACKAGE
+		default y
+		bool "wpasupplicant"
+
+	config  WLAN_IWCONFIG
+		depends on  WLAN_PACKAGE
+		default y
+		bool "iwconfig"
+
+	config  WLAN_IWPRIV
+		depends on  WLAN_PACKAGE
+		default y
+		bool "iwpriv"
+
+	config  WLAN_WLANCONFIG
+		depends on  WLAN_PACKAGE
+		default y
+		bool "wlanconfig"
+
+	config  WLAN_ACFG
+		depends on  WLAN_PACKAGE
+		default y
+		bool "acfg"
+endif
+
+
+menuconfig  NET_PACKAGE
+	bool "NETWORKING COMMANDS"
+	default y
+	help
+	  Select the command you wish to use.
+
+if NET_PACKAGE	
+	config  NET_IFCONFIG
+	depends on  NET_PACKAGE
+	default y
+	bool "ifconfig"
+
+	config  NET_IPFW
+	depends on  NET_PACKAGE
+	default y
+	bool "ipfw"
+
+	config  NET_DNS
+	depends on  NET_PACKAGE
+	default y
+	bool "DNS"
+endif

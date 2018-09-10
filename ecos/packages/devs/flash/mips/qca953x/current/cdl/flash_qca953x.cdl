@@ -1,0 +1,108 @@
+# ====================================================================
+#
+#      flash_qca953x.cdl
+#
+#      FLASH memory - Hardware support on MIPS QCA953X
+#
+# ====================================================================
+## ####ECOSGPLCOPYRIGHTBEGIN####
+## -------------------------------------------
+## This file is part of eCos, the Embedded Configurable Operating System.
+## Copyright (C) 1998, 1999, 2000, 2001, 2002 Free Software Foundation, Inc.
+##
+## eCos is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free
+## Software Foundation; either version 2 or (at your option) any later
+## version.
+##
+## eCos is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+## for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with eCos; if not, write to the Free Software Foundation, Inc.,
+## 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+##
+## As a special exception, if other files instantiate templates or use
+## macros or inline functions from this file, or you compile this file
+## and link it with other works to produce a work based on this file,
+## this file does not by itself cause the resulting work to be covered by
+## the GNU General Public License. However the source code for this file
+## must still be made available in accordance with section (3) of the GNU
+## General Public License v2.
+##
+## This exception does not invalidate any other reasons why a work based
+## on this file might be covered by the GNU General Public License.
+## -------------------------------------------
+## ####ECOSGPLCOPYRIGHTEND####
+# ====================================================================
+######DESCRIPTIONBEGIN####
+#
+# Author(s):      jskov
+# Contributors:
+# Date:           2001-03-21
+#
+#####DESCRIPTIONEND####
+#
+# ====================================================================
+
+cdl_package CYGPKG_DEVS_FLASH_QCA953X {
+    display       "MIPS QCA953X FLASH memory support"
+
+    parent        CYGPKG_IO_FLASH
+    active_if	  CYGPKG_IO_FLASH
+    requires	  CYGPKG_HAL_MIPS_QCA953X
+    implements    CYGHWR_IO_FLASH_DEVICE
+    include_dir   .
+    compile        -library=libextras.a mips_qca953x_flash.c
+
+    cdl_component CYGPKG_FLASH_LAYOUT {
+	display "QCA953x flash layout"
+	flavor bool
+	default_value 1
+
+    cdl_option CYGPKG_FLASH_LAYOUT_START {
+	display "QCA953x flash start"
+	flavor data
+	define -file system.h QCA953X_FLASH_START
+	default_value 0x9f000000
+    }
+
+    cdl_option CYGPKG_FLASH_LAYOUT_SIZE {
+	display "QCA953x flash size"
+	flavor data
+	define -file system.h QCA953X_FLASH_SIZE
+	default_value (1024 * 1024)
+    }
+
+    }
+
+    cdl_option CYGPKG_FLASH_LAYOUT_ECOS_IMAGE {
+	display "eCos image base"
+	flavor data
+	define -file system.h ECOS_IMAGE_BASE
+	default_value 0x9f009000
+    }
+
+    cdl_component CYGPKG_FLASH_LAYOUT_CAL_DATA {
+	display "calibration data"
+	flavor bool
+	default_value 1
+	
+    cdl_option CYGPKG_FLASH_LAYOUT_CAL_ADDR_DATA {
+	display "calibration data base address"
+	flavor data
+	define -file system.h FLASH_ADDR_CAL_DATA
+	default_value 0x9f0ff000
+    }
+
+    cdl_option CYGPKG_FLASH_LAYOUT_CAL_SIZE_DATA {
+	display "calibration data size"
+	flavor data
+	define -file system.h FLASH_SIZE_CAL_DATA
+	default_value 4096
+    }
+
+    }
+}

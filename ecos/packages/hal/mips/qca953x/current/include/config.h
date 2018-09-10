@@ -1,0 +1,15 @@
+#ifndef __ATHEROS_CONFIG_H
+#define __ATHEROS_CONFIG_H
+
+#define CONFIG_ATHEROS		1
+#define CONFIG_MACH_QCA953x	1
+#define CFG_INIT_STACK_IN_SRAM	1
+#define CONFIG_AP147		1
+#define __CONFIG_BOARD_NAME	"AP147"
+#define CONFIG_BOARD_NAME	"AP147"
+#define BUILD_VERSION		"rough draft"
+#define CFG_PLL_FREQ		CFG_PLL_650_400_200
+#define CONFIG_ATH_DUAL_IMAGE_SUPPORT	0
+#include <cyg/hal/board953x.h>
+
+#endif // __ATHEROS_CONFIG_H
